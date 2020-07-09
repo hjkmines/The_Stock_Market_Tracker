@@ -2,7 +2,7 @@ Portfolio.destroy_all
 Stock.destroy_all 
 User.destroy_all 
 
-# existing users 
+# #existing users 
 # user1 = User.create(name: "Tony Kim", age: rand(18..125))
 # user2 = User.create(name: "John Santos", age: rand(18..125))
 # user3 = User.create(name: "Paul Mer", age: rand(18..125))
@@ -11,12 +11,15 @@ User.destroy_all
 
 
 # # stocks 
-# stock1 = Stock.create(stock: random_stock[0], ticker_symbol: random_stock[1], price: parsed_quotes[:c])
-# stock2 = Stock.create(stock: random_stock[0], ticker_symbol: random_stock[1], price: parsed_quotes[:c])
-# stock3 = Stock.create(stock: random_stock[0], ticker_symbol: random_stock[1], price: parsed_quotes[:c])
-# stock4 = Stock.create(stock: random_stock[0], ticker_symbol: random_stock[1], price: parsed_quotes[:c])
-# stock5 = Stock.create(stock: random_stock[0], ticker_symbol: random_stock[1], price: parsed_quotes[:c])
-# stock6 = Stock.create(stock: random_stock[0], ticker_symbol: random_stock[1], price: parsed_quotes[:c])
+# stock1 = Stock.create(stock: Stock.stock_generator[0], ticker_symbol: Stock.stock_generator[1], price: Stock.stock_generator[2])
+# stock2 = Stock.create(stock: Stock.stock_generator[0], ticker_symbol: Stock.stock_generator[1], price: Stock.stock_generator[2])
+# stock3 = Stock.create(stock: Stock.stock_generator[0], ticker_symbol: Stock.stock_generator[1], price: Stock.stock_generator[2])
+# stock4 = Stock.create(stock: Stock.stock_generator[0], ticker_symbol: Stock.stock_generator[1], price: Stock.stock_generator[2])
+# stock5 = Stock.create(stock: Stock.stock_generator[0], ticker_symbol: Stock.stock_generator[1], price: Stock.stock_generator[2])
+# stock6 = Stock.create(stock: Stock.stock_generator[0], ticker_symbol: Stock.stock_generator[1], price: Stock.stock_generator[2])
+# stock7 = Stock.create(stock: Stock.stock_generator[0], ticker_symbol: Stock.stock_generator[1], price: Stock.stock_generator[2])
+# stock8 = Stock.create(stock: Stock.stock_generator[0], ticker_symbol: Stock.stock_generator[1], price: Stock.stock_generator[2])
+
 
 # # #portfolios
 # Portfolio.create(user_id: user1.id, stock_id: stock1.id, company: "Vanguard", account_number: rand(100000..999999), account_value: rand(100000..9999999))

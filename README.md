@@ -1,71 +1,94 @@
-# Mod 1 ActiveRecord Starter Repo
+# Stock Martket Command Line Application 
+> Your one stop application for stock market analysis!
 
-In `config/database.yml`, you can change the name of the database from `db/cats.sqlite3` to whatever reflects your project. For example: `db/notes.sqlite3`. Doesn't really matter what you call the db. 
+## Table of Contents 
+*[General Info](#general-info)
+*[Intro Video](#intro-video)
+*[Technologies](#technologies)
+*[Code Examples](#code-examples)
+*[Features](#features)
+*[Status](#status)
+*[Inspiration](#inspiration)
+*[Contact](#contact)
+*[License](#license)
 
+## General Info 
+This stock market command line application allow users to own a brokerage account, buy/sell stocks, and research any stocks! New users will be also awarded one free random stock!!
 
+## Intro Video 
 
-## ActiveRecord Methods
-These common ActiveRecord methods will help you interact with your database. Please refer to the ActiveRecord
-docs for what they do and how to use them. (If the docs talk about Rails, that is ok! ActiveRecord works very
- similar with or without Rails.)
+## Technologies
+* Ruby - version 2.6.1
+* ActiveRecord - version 6.0
+* Sinatra - version 2.0
+* Sinatra-activerecord - version 2.0
+* SQLite3 - version 1.4
+* Rest-Client - version 2.1
+* JSON - version 2.3
+
+## Setup 
+To try out this project: 
+1. Open a account with https://finnhub.io/
+1. Clone the GitHub repository locally to your computer
+1. In the command line, navigate to the root directory of this repository, and enter the following: 
+  $ touch .env 
+1. Navigate to the .env folder, and paste in the following: 
+  export API_KEY=YOUR_API_KEY_HERE (e.g. export API_KEY=15151515)
+1. Now save all files, on Windows: (start + alt + s), on Macs: (command + alt +s)
+1. Run the following code in the command line while being in the most root folder of this project: 
+```ruby
+ruby runner.rb
 ```
-  .create (.new, .save)
-  .all
-  .count
-  .find
-  .find_by
-  .where
+## Code Examples
+```ruby
+def self.stock_generator 
+    #api data for company stock symbols 
+    key = ENV["API_KEY"]
+    stock_symbols = RestClient.get "https://finnhub.io/api/v1/stock/symbol?exchange=US&token=#{key}"
+    #parsed data for stock symbols 
+    parsed_stock_symbols = JSON.parse(stock_symbols)
+    #outputs company name like ["American Airlines", "Google", "etc"]
+    description = parsed_stock_symbols.map do |stock|
+      stock["description"]
+    end.compact 
+    #outputs company symbol like ["AAL", "GOOGL", "etc"]
+    symbols = parsed_stock_symbols.map do |stock|
+      stock["symbol"]
+    end.compact 
+    #reorganizes array with company and its symbol like [["American Airlines", "AAL"], ["Google", "GOOGL"]]
+    stocks_with_symbols = description.zip(symbols)
+    #selects random stock from the variable above 
+    random_stock = stocks_with_symbols.sample 
+    #fetches realtime quote of target company 
+    quote = RestClient.get "https://finnhub.io/api/v1/quote?symbol=#{random_stock[1]}&token=#{key}"
+    parsed_quotes = JSON.parse(quote)
+    stock_and_current_price = random_stock.push(parsed_quotes["c"].to_i)
+    end 
 ```
 
-#### Notes
-
-*Remember*, any model that will have a corresponding table in the database needs to inherit from `ActiveRecord::Base`
-ex:
-```
-class Cat < ActiveRecord::Base
-  # customer methods defined here
-end
+```ruby
+def self.random_10_stocks 
+      p ("Time that the data was pulled:" + " #{Time.now}")
+      10.times {p(Stock.stock_generator)}
+    end 
 ```
 
-- To view database, you can run `sqlite3 db/cats.db`, then can run `.schema` or `.tables` and can run any SQL commands. (Don't need to do this anymore though! ActiveRecord gives us a schema file!)
+## Features
+* Create a brokerage account with various stock trading accounts 
+* Check portfolio balance
+* Check porfolio holdings 
+* Buy and sell stocks in the US Market 
+* Research stocks 
+* View 10 random stocks for today!
 
+## Status
+Project is: finished, has the option to add additional features for the user and ability to refactoring. 
 
-### Steps to setup Ruby app with activerecord
-(New for ActiveRecord 6.0)
+## Inspiration
+The inspiration for this applicaiton came from my passion and interest in the stock market. Utilizing a open-source Finnhub Stock API, all types of users have the ability to research stocks in this easy to use application!
 
+## Contact
+Created by [Tony Kim](https://www.linkedin.com/in/hyung-kim/)
 
-## The following steps are already done for you in this boiler plate repo. 
-## The steps below are provided to you as a reference only. 
-## You're not expected to memorize this (please don't).
-
-
-1. In root of project, run `bundle init`
-1. Add gems: 
-  `bundle add activerecord pry sinatra, sinatra-activerecord rake sqlite3 require_all`
-  run `bundle install`
-1. mkdir config and lib 
-1. mkdir lib/models
-1. touch config/environment.rb config/database.yml
-1. Create your model files and models (make sure to have your models inherit from ActiveRecord::Base)
-1. In config/environment.rb:
-```
-  require 'bundler/setup'
-  Bundler.require
-
-  require_all 'lib'
-```
-1. In config/database.yml:
-  ```
-  development:
-    adapter: sqlite3
-    database: db/cats.sqlite3
-  ```
-1. Touch Rakefile - require ‘config/environment.rb’ and require_relative ‘sinatra/activerecord/rake’ 
-1. Run rake -T to make sure we have access to raketasks
-1. Run `rake db:create_migration NAME=create_cats_table` (will create the db folder if it doesn’t already exist) and will add the migration file to db/migration
-1. Write migration file, then run `rake db:migrate`
-1. Then can see schema in file structure, can also drop into sqlite3 cats.db to see the tables and schema, but don’t really need to do that anymore. *Review rollback here*
-1. Create seeds in db/seeds.rb and run `rake db:seed`
-1. Now can put a pry in environment.rb to run <ModelName>.all and see your seeds.
-
-Make sure your models inherit from `ActiveRecord::Base`
+Feel free to contact me with any questions or inquires about this project!
+E-mail: hjkmines@gmail.com

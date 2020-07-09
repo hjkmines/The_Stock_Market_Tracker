@@ -4,3 +4,4 @@ app = Cli.new
 
 app.welcome
 
+binding.pry
