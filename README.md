@@ -88,4 +88,6 @@ Created by [Tony Kim](https://www.linkedin.com/in/hyung-kim/)
 
 Feel free to contact me with any questions or inquires about this project!
 E-mail: hjkmines@gmail.com
+
+## License
 [Click to view](https://github.com/hjkmines/stock_market_application/blob/master/LICENSE)
