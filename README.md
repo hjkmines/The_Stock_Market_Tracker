@@ -3,7 +3,6 @@
 
 ## Table of Contents 
 * [General Info](#general-info)
-* [Intro Video](#intro-video)
 * [Technologies](#technologies)
 * [Code Examples](#code-examples)
 * [Features](#features)
@@ -31,7 +30,9 @@ To try out this project:
 1. Open a account with https://finnhub.io/
 1. Clone the GitHub repository locally to your computer
 1. In the command line, navigate to the root directory of this repository, and enter the following: 
+  $ bundle install 
   $ touch .env 
+  $ rake db:migrate
 1. Navigate to the .env folder, and paste in the following: 
   export API_KEY=YOUR_API_KEY_HERE (e.g. export API_KEY=15151515)
 1. Now save all files, on Windows: (start + alt + s), on Macs: (command + alt +s)
