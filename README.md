@@ -14,8 +14,6 @@
 ## General Info 
 This stock market command line application allow users to own a brokerage account, buy/sell stocks, and research any stocks! New users will be also awarded one free random stock!!
 
-## Intro Video 
-
 ## Technologies
 * Ruby - version 2.6.1
 * ActiveRecord - version 6.0
